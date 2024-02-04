@@ -1,10 +1,10 @@
 # DAPHoloPanda
 
-##Overview
+## Overview
 
 This is a Resume-to-Job-Description Machine Learning project.
 
-##How to Run
+## How to Run
 
 
 1. Clone the repository to your local machine:
