@@ -16,9 +16,9 @@ This is a Resume-to-Job-Description Machine Learning project.
 
 2. Download the Job Description Dataset through Kaggle
 
-```bash
-https://www.kaggle.com/datasets/PromptCloudHQ/jobs-on-naukricom
-```
+
+  https://www.kaggle.com/datasets/PromptCloudHQ/jobs-on-naukricom
+
 
 3. Install the required dependencies
   ```bash
