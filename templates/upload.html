@@ -1,14 +1,52 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upload Your Resume</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
+
 <body>
-    <h1>Upload Your Resume</h1>
-    <form action="/" method="post" enctype="multipart/form-data">
-        <label for="file">Choose resume to upload (PDF only):</label>
-        <input type="file" id="file" name="file" accept=".pdf">
-        <input type="submit" value="Upload Resume">
-    </form>
+    <div class="overall-container">
+        <h1>Upload Your Resume</h1>
+        <i style="color:gray; padding-bottom: 15px;">Unlock Your Future: Upload Your Resume, Discover Your Path.</i>
+        <div class="container">
+            <form action="/" method="post" enctype="multipart/form-data" id="uploadForm">
+                <div class="form-group">
+                    <label for="file" class="custom-file-upload btn btn-primary">Choose resume to upload (PDF only)</label>
+                    <input type="file" id="file" name="file" accept=".pdf" onchange="showSubmitButton()" style="display: none;">
+                    <input type="button" value="Submit Resume" class="custom-button btn btn-primary" onclick="submitForm()" id="submitButton" style="display: none;">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        function showSubmitButton() {
+            var fileInput = document.getElementById('file');
+            var submitButton = document.getElementById('submitButton');
+
+            if (fileInput.files.length > 0) {
+                submitButton.style.display = 'inline-block'; // Displaying the submit button inline with the label
+            } else {
+                submitButton.style.display = 'none';
+            }
+        }
+
+        function submitForm() {
+            document.getElementById('uploadForm').submit();
+        }
+    </script>
 </body>
+
 </html>

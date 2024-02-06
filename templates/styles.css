@@ -1,0 +1,94 @@
+/* General Reset */
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+    color: #fff;
+    background-image: url('https://www.pwc.com/sg/en/assets/images/hero-sg-lg-gettyimages-1201502161.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+/* Main Containers */
+.overall-container {
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 500px;
+    width: 100%;
+}
+
+.container {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 450px;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+/* Typography */
+h1 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Lists */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #3498db;
+    color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Text Styling */
+strong {
+    color: #fff;
+}
+
+/* Forms */
+form {
+    text-align: left;
+    width: 100%;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+/* Buttons */
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.custom-file-upload,
+.custom-button {
+    background-color: #3498db;
+    color: #fff;
+    padding: 12px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.custom-button {
+    display: none;
+}

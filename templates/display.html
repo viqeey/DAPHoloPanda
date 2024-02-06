@@ -1,17 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Job Recommendations</title>
+    <link rel="stylesheet" type="text/css" href="styles.css"/>
 </head>
+
 <body>
-    <h1>Your Top 5 Job Recommendations</h1>
-    <ul>
-        {% for recommendation in recommendations %}
-            <li>
-                <strong>{{ recommendation.jobtitle }}</strong> at {{ recommendation.company }}<br>
-                Description: {{ recommendation.jobdescription }}...
-            </li>
-        {% endfor %}
-    </ul>
+    <div class="overall-container">
+        <h1>Your Top 5 Job Recommendations</h1>
+        <ul>
+            {% for recommendation in recommendations %}
+                <li>
+                    <strong>{{ recommendation.jobtitle }}</strong> at {{ recommendation.company }}<br>
+                    Description: {{ recommendation.jobdescription }}...
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
 </body>
+
 </html>
