@@ -4,6 +4,7 @@ import fitz  # PyMuPDF for extracting text from PDF
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import pandas as pd
+import numpy as np
 import nltk
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
@@ -55,6 +56,14 @@ def load_job_descriptions(csv_path):
     df['jobdescription'] = df['jobdescription'].fillna('')
     return df
 
+def get_top_contributing_words(vectorizer, tfidf_matrix, target_doc_index, comparison_doc_index, top_n=10):
+    feature_array = np.array(vectorizer.get_feature_names_out())
+    target_vector = tfidf_matrix[target_doc_index].toarray()
+    comparison_vector = tfidf_matrix[comparison_doc_index].toarray()
+    contribution_scores = np.multiply(target_vector, comparison_vector)
+    top_contributing_indices = contribution_scores.argsort()[0][-top_n:][::-1]
+    top_contributing_words = [(feature_array[index], contribution_scores[0][index]) for index in top_contributing_indices]
+    return top_contributing_words
 
 def get_job_recommendations(resume_text, df):
     job_descriptions = df['jobdescription'].tolist()
@@ -66,15 +75,19 @@ def get_job_recommendations(resume_text, df):
     top_five = recommendations[:5]
     
     top_recommendations = []
-    for i, _ in top_five:
+    for i, score in top_five:
+        # Calculate top contributing words for each recommendation
+        top_words = get_top_contributing_words(vectorizer, tfidf_matrix, 0, i+1, top_n=10)  # i+1 because 0 is the resume
+        
         top_recommendations.append({
             'company': df.iloc[i]['company'],
             'jobtitle': df.iloc[i]['jobtitle'],
-            'jobdescription': df.iloc[i]['jobdescription'][:200]  # First 100 characters
+            'jobdescription': df.iloc[i]['jobdescription'][40:200],  # First 160 characters
+            'similarity_score': round(score * 100, 2),  # Added similarity score, rounded and converted to percentage
+            'top_words': top_words  # Include the top contributing words in the recommendation
         })
     
     return top_recommendations
-
 
 def handle_resume_upload(file):
     if file.filename == '':
@@ -84,7 +97,7 @@ def handle_resume_upload(file):
     filename = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
     file.save(filename)
     resume_text = extract_text_from_pdf(filename)
-    
+        
     df = load_job_descriptions(JOB_DESCRIPTIONS_CSV_PATH)  # Load as DataFrame
     recommendations = get_job_recommendations(resume_text, df)
     
