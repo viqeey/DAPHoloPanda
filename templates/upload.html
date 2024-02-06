@@ -16,13 +16,42 @@
         <h1>Upload Your Resume</h1>
         <i style="color:gray; padding-bottom: 15px;">Unlock Your Future: Upload Your Resume, Discover Your Path.</i>
         <div class="container">
-            <form action="/" method="post" enctype="multipart/form-data" id="uploadForm">
+            <form action="display.html" method="post" enctype="multipart/form-data" id="uploadForm">
                 <div class="form-group">
-                    <label for="file" class="custom-file-upload btn btn-primary">Choose resume to upload (PDF only)</label>
+                    <!-- Hidden file input -->
                     <input type="file" id="file" name="file" accept=".pdf" onchange="showSubmitButton()" style="display: none;">
+                    
+                    <!-- Bootstrap button linked to the file input -->
+                    <label for="file" class="btn btn-primary">
+                        Choose resume to upload (PDF only)
+                    </label>
+
+                    <!-- Submit button (initially hidden) -->
                     <input type="button" value="Submit Resume" class="custom-button btn btn-primary" onclick="submitForm()" id="submitButton" style="display: none;">
                 </div>
             </form>
+        </div>
+    </div>
+
+    <!-- Modal for file upload -->
+    <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="uploadModalLabel">Upload File</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="dropzone text-center" id="dropzone">
+                        <p>Drag & Drop files here or click to browse</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -32,6 +61,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <script>
+        // Show submit button when a file is selected
         function showSubmitButton() {
             var fileInput = document.getElementById('file');
             var submitButton = document.getElementById('submitButton');
@@ -43,6 +73,7 @@
             }
         }
 
+        // Submit form
         function submitForm() {
             document.getElementById('uploadForm').submit();
         }
