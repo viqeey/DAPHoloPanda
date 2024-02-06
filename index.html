@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="/templates/styles.css">
 </head>
 
 <body>
@@ -16,7 +16,7 @@
         <h1>Upload Your Resume</h1>
         <i style="color:gray; padding-bottom: 15px;">Unlock Your Future: Upload Your Resume, Discover Your Path.</i>
         <div class="container">
-            <form action="display.html" method="post" enctype="multipart/form-data" id="uploadForm">
+            <form action="/templates/display.html" method="post" enctype="multipart/form-data" id="uploadForm">
                 <div class="form-group">
                     <!-- Hidden file input -->
                     <input type="file" id="file" name="file" accept=".pdf" onchange="showSubmitButton()" style="display: none;">
