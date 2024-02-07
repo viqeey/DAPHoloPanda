@@ -64,7 +64,7 @@ def get_job_recommendations(resume_text):
     
     return top_recommendations
 
-@app.route('/upload', methods=['GET', 'POST'])
+@app.route('/display.html', methods=['GET', 'POST'])
 def upload_resume():
     if request.method == 'POST':
         file = request.files.get('file')
