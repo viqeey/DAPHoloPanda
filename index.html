@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Upload Your Resume</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap JS bundle to be placed before the closing -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3/dist/js/bootstrap.bundle.min.js" ></script> 
     <!-- Custom CSS -->
-    <link rel="stylesheet" type="text/css" href="/templates/styles.css">
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 
 <body>
@@ -16,64 +16,61 @@
         <h1>Upload Your Resume</h1>
         <i style="color:gray; padding-bottom: 15px;">Unlock Your Future: Upload Your Resume, Discover Your Path.</i>
         <div class="container">
-            <form action="/templates/display.html" method="post" enctype="multipart/form-data" id="uploadForm">
-                <div class="form-group">
-                    <!-- Hidden file input -->
-                    <input type="file" id="file" name="file" accept=".pdf" onchange="showSubmitButton()" style="display: none;">
-                    
-                    <!-- Bootstrap button linked to the file input -->
-                    <label for="file" class="btn btn-primary">
-                        Choose resume to upload (PDF only)
-                    </label>
-
-                    <!-- Submit button (initially hidden) -->
-                    <input type="button" value="Submit Resume" class="custom-button btn btn-primary" onclick="submitForm()" id="submitButton" style="display: none;">
+            <form action="/" method="post" enctype="multipart/form-data" id="uploadForm">
+                <div class="button-container">
+                    <label for="file" class="custom-file-upload">Choose resume to upload (PDF only)</label>
+                    <div id="fileInfo" class="file-info" style="display: none;">
+                        <span id="fileName"></span>
+                        <br>
+                        <span id="fileSize"></span>
+                    </div>
+                    <input type="file" id="file" name="file" accept=".pdf" onchange="showFileInfo()">
+                    <input type="button" value="Submit Resume" class="custom-button" onclick="submitForm()" id="submitButton" style="display:none;">
                 </div>
             </form>
-        </div>
-    </div>
-
-    <!-- Modal for file upload -->
-    <div class="modal fade" id="uploadModal" tabindex="-1" role="dialog" aria-labelledby="uploadModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="uploadModalLabel">Upload File</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="dropzone text-center" id="dropzone">
-                        <p>Drag & Drop files here or click to browse</p>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
+            <div id="fileInfoContainer" style="display: none;">
+                <button id="removeFileButton" class="custom-button" onclick="removeFile()">Remove File</button>
             </div>
         </div>
     </div>
 
-    <!-- Bootstrap JavaScript -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
     <script>
-        // Show submit button when a file is selected
-        function showSubmitButton() {
+        function showFileInfo() {
             var fileInput = document.getElementById('file');
+            var fileInfoContainer = document.getElementById('fileInfoContainer');
+            var fileInfo = document.getElementById('fileInfo');
+            var fileNameText = document.getElementById('fileName');
+            var fileSizeText = document.getElementById('fileSize');
             var submitButton = document.getElementById('submitButton');
 
             if (fileInput.files.length > 0) {
-                submitButton.style.display = 'inline-block'; // Displaying the submit button inline with the label
+                var file = fileInput.files[0];
+                fileNameText.textContent = 'File Name: ' + file.name;
+                fileSizeText.textContent = 'File Size: ' + (file.size / 1024).toFixed(2) + ' KB';
+                fileInfoContainer.style.display = 'block';
+                fileInfo.style.display = 'block';
+                submitButton.style.display = 'block'; // Show the submit button when a file is uploaded
             } else {
-                submitButton.style.display = 'none';
+                fileInfoContainer.style.display = 'none';
+                fileInfo.style.display = 'none';
+                submitButton.style.display = 'none'; // Hide the submit button when no file is uploaded
             }
         }
 
-        // Submit form
+        function removeFile() {
+            var fileInput = document.getElementById('file');
+            var fileInfoContainer = document.getElementById('fileInfoContainer');
+            var fileInfo = document.getElementById('fileInfo');
+            var fileNameText = document.getElementById('fileName');
+
+            fileInput.value = ''; // Clear the file input
+            fileNameText.textContent = ''; // Clear the displayed file name
+            fileInfoContainer.style.display = 'none'; // Hide the file info container
+            fileInfo.style.display = 'none'; // Hide the file info section
+            var submitButton = document.getElementById('submitButton');
+            submitButton.style.display = 'none'; // Hide the submit button after file removal
+        }
+
         function submitForm() {
             document.getElementById('uploadForm').submit();
         }

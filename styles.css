@@ -1,7 +1,7 @@
-/* General Reset */
 body {
-    margin: 0;
-    padding: 0;
+    background-image: url('https://www.pwc.com/sg/en/assets/images/hero-sg-lg-gettyimages-1201502161.jpg');
+    background-size: cover;
+    background-position: center;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -10,12 +10,8 @@ body {
     text-align: center;
     font-family: 'Arial', sans-serif;
     color: #fff;
-    background-image: url('https://www.pwc.com/sg/en/assets/images/hero-sg-lg-gettyimages-1201502161.jpg');
-    background-size: cover;
-    background-position: center;
 }
 
-/* Main Containers */
 .overall-container {
     background-color: rgba(255, 255, 255, 0.7);
     padding: 20px;
@@ -33,39 +29,26 @@ body {
     border-radius: 8px;
 }
 
-/* Typography */
 h1 {
     color: #333;
     margin-bottom: 10px;
 }
 
-/* Lists */
-ul {
-    list-style: none;
-    padding: 0;
+label {
+    color: #3498db;
+    display: block;
+    margin-bottom: 10px;
 }
 
-li {
-    margin-bottom: 20px;
-    padding: 20px;
-    border-radius: 8px;
-    background-color: #3498db;
-    color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* Text Styling */
-strong {
-    color: #fff;
-}
-
-/* Forms */
 form {
     text-align: left;
     width: 100%;
 }
 
-/* Buttons */
+input[type="file"] {
+    display: none;
+}
+
 .button-container {
     display: flex;
     flex-direction: column;
@@ -74,8 +57,9 @@ form {
     margin-top: 10px;
 }
 
-.custom-file-upload,
-.custom-button {
+.custom-button,
+.custom-file-upload {
+    margin-top: 10px;
     background-color: #3498db;
     color: #fff;
     padding: 12px 20px;
@@ -83,8 +67,26 @@ form {
     cursor: pointer;
     border-radius: 4px;
     font-size: 16px;
+    cursor: pointer;
 }
 
-.custom-button {
-    display: none;
+.fileInfoContainer {
+    margin: 10px;
+    padding: 10px;
+    text-align: center;
+}
+
+.file-info {
+    margin-top: 10px;
+    padding: 10px;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 8px;
+    max-width: 400px;
+    width: 100%; /* Ensure it takes full width of its container */
+}
+
+#fileInfo {
+    color: black;
+    display: flex;
 }
