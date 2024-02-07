@@ -15,7 +15,7 @@ app = Flask(__name__)
 
 ALLOWED_EXTENSIONS = {'pdf'}
 
-JOB_DESCRIPTIONS_CSV_PATH = 'download_this_dataset\naukri_com-job_sample.csv'  # Update this path
+JOB_DESCRIPTIONS_CSV_PATH = 'download_this_dataset/naukri_com-job_sample.csv'
 
 # Load job descriptions from CSV
 df = pd.read_csv(JOB_DESCRIPTIONS_CSV_PATH)
@@ -64,7 +64,7 @@ def get_job_recommendations(resume_text):
     
     return top_recommendations
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/upload', methods=['GET', 'POST'])
 def upload_resume():
     if request.method == 'POST':
         file = request.files.get('file')
@@ -77,8 +77,9 @@ def upload_resume():
             return render_template('display.html', recommendations=recommendations)
         else:
             return 'Invalid file extension'
-
-    return render_template('index.html')
+    else:
+        # Handle GET request if needed, for example, render the index.html template
+        return render_template('index.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
