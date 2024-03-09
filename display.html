@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Recommendations</title>
+    <link rel="stylesheet" type="text/css" href="displaystyles.css"/>
+</head>
+
+<body>
+    <div class="overall-container">
+        <h1>Your Top 5 Job Recommendations</h1>
+        <ul>
+            {% for recommendation in recommendations %}
+                <li>
+                    <strong>{{ recommendation.jobtitle }}</strong> at {{ recommendation.company }}<br>
+                    Description: {{ recommendation.jobdescription }}<br>
+                    Similarity Score: {{ recommendation.similarity_score }}%<br>
+                    <strong>Top Contributing Words:</strong>
+                    <ul>
+                        {% for word, score in recommendation.top_words %}
+                            <li>{{ word }}: {{ '%.3f' | format(score) }}</li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+
+</html>

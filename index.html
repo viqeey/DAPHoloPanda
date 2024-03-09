@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Your Resume</title>
+    <!-- Bootstrap JS bundle to be placed before the closing -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3/dist/js/bootstrap.bundle.min.js" ></script> 
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+    <div class="overall-container">
+        <h1>Upload Your Resume</h1>
+        <i style="color:gray; padding-bottom: 15px;">Unlock Your Future: Upload Your Resume, Discover Your Path.</i>
+        <div class="container">
+            <form action="/display.html" method="post" enctype="multipart/form-data" id="uploadForm">
+                <div class="button-container">
+                    <label for="file" class="custom-file-upload">Choose resume to upload (PDF only)</label>
+                    <div id="fileInfo" class="file-info" style="display: none;">
+                        <span id="fileName"></span>
+                        <br>
+                        <span id="fileSize"></span>
+                    </div>
+                    <input type="file" id="file" name="file" accept=".pdf" onchange="showFileInfo()">
+                    <input type="button" value="Submit Resume" class="custom-button" onclick="submitForm()" id="submitButton" style="display:none;">
+                </div>
+            </form>
+            <div id="fileInfoContainer" style="display: none;">
+                <button id="removeFileButton" class="custom-button" onclick="removeFile()">Remove File</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showFileInfo() {
+            var fileInput = document.getElementById('file');
+            var fileInfoContainer = document.getElementById('fileInfoContainer');
+            var fileInfo = document.getElementById('fileInfo');
+            var fileNameText = document.getElementById('fileName');
+            var fileSizeText = document.getElementById('fileSize');
+            var submitButton = document.getElementById('submitButton');
+
+            if (fileInput.files.length > 0) {
+                var file = fileInput.files[0];
+                fileNameText.textContent = 'File Name: ' + file.name;
+                fileSizeText.textContent = 'File Size: ' + (file.size / 1024).toFixed(2) + ' KB';
+                fileInfoContainer.style.display = 'block';
+                fileInfo.style.display = 'block';
+                submitButton.style.display = 'block'; // Show the submit button when a file is uploaded
+            } else {
+                fileInfoContainer.style.display = 'none';
+                fileInfo.style.display = 'none';
+                submitButton.style.display = 'none'; // Hide the submit button when no file is uploaded
+            }
+        }
+
+        function removeFile() {
+            var fileInput = document.getElementById('file');
+            var fileInfoContainer = document.getElementById('fileInfoContainer');
+            var fileInfo = document.getElementById('fileInfo');
+            var fileNameText = document.getElementById('fileName');
+
+            fileInput.value = ''; // Clear the file input
+            fileNameText.textContent = ''; // Clear the displayed file name
+            fileInfoContainer.style.display = 'none'; // Hide the file info container
+            fileInfo.style.display = 'none'; // Hide the file info section
+            var submitButton = document.getElementById('submitButton');
+            submitButton.style.display = 'none'; // Hide the submit button after file removal
+        }
+
+        function submitForm() {
+            document.getElementById('uploadForm').submit();
+        }
+    </script>
+</body>
+
+</html>
